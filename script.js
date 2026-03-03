@@ -1,14 +1,13 @@
 const factEl = document.getElementById("fact");
 const imgEl = document.getElementById("catImage");
 const generateBtn = document.getElementById("generateBtn");
-const shareBtn = document.getElementById("shareBtn");
+const shareXBtn = document.getElementById("shareX");
 const countEl = document.getElementById("count");
 
 let wisdomCount = 0;
 let currentFact = "";
 
 async function getCat() {
-
   factEl.classList.add("fade-out");
   imgEl.classList.add("fade-out");
 
@@ -21,16 +20,20 @@ async function getCat() {
 
     setTimeout(() => {
       currentFact = factData.fact;
+
       factEl.textContent = currentFact;
       imgEl.src = imgData[0].url;
+
+      factEl.scrollTop = 0;
 
       factEl.classList.remove("fade-out");
       imgEl.classList.remove("fade-out");
 
       wisdomCount++;
       countEl.textContent = wisdomCount;
-    }, 400);
 
+      updateShareLink();
+    }, 400);
   } catch (error) {
     factEl.textContent = "The cat is sleeping. Try again.";
     factEl.classList.remove("fade-out");
@@ -38,15 +41,14 @@ async function getCat() {
   }
 }
 
-function shareOnX() {
+function updateShareLink() {
   if (!currentFact) return;
 
-  const tweet = `Senior Cat Architect says:\n"${currentFact}"`;
-  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
-  window.open(url, "_blank");
+  const text = `Senior Cat Architect says:\n"${currentFact}"`;
+  shareXBtn.href =
+    "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
 }
 
 generateBtn.addEventListener("click", getCat);
-shareBtn.addEventListener("click", shareOnX);
 
 getCat();

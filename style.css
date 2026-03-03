@@ -4,13 +4,14 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   overflow: hidden;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,8 +19,6 @@ body {
   color: white;
   padding: 16px;
 }
-
-/* Card */
 
 .card {
   width: 100%;
@@ -33,17 +32,13 @@ body {
   display: flex;
   flex-direction: column;
   text-align: center;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
-
-/* Title */
 
 h2 {
   font-weight: 700;
   margin-bottom: 16px;
 }
-
-/* Image */
 
 img {
   width: 100%;
@@ -54,23 +49,35 @@ img {
   transition: opacity 0.4s ease;
 }
 
-/* Fact Text */
-
 p {
   flex: 1;
   font-size: 15px;
   line-height: 1.6;
-  overflow-y: auto;
   margin-bottom: 10px;
-  padding-right: 4px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  padding-right: 6px;
   transition: opacity 0.4s ease;
+}
+
+/* Clean thin scrollbar */
+
+p::-webkit-scrollbar {
+  width: 4px;
+}
+
+p::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+p::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
 }
 
 .fade-out {
   opacity: 0;
 }
-
-/* Buttons */
 
 button {
   padding: 12px 22px;
@@ -91,15 +98,11 @@ button {
   transform: scale(1.05);
 }
 
-/* Counter */
-
 .counter {
   font-size: 13px;
   opacity: 0.7;
   margin-top: 8px;
 }
-
-/* Share Section */
 
 .share-section {
   margin-top: 14px;
@@ -107,31 +110,16 @@ button {
   justify-content: center;
 }
 
-.share {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #000;
-  transition: 0.25s ease;
-  cursor: pointer;
-}
-
-.share:hover {
-  transform: scale(1.1);
-}
-
-/* X Icon */
-
 .x-icon {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
+  width: 60px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.25s ease;
 }
 
-/* Footer */
+.x-icon:hover {
+  transform: scale(1.05);
+}
 
 .footer {
   font-size: 12px;
