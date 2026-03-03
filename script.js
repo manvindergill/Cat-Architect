@@ -3,8 +3,9 @@ const imgEl = document.getElementById("catImage");
 const btn = document.getElementById("generateBtn");
 const countEl = document.getElementById("count");
 const bgBlur = document.getElementById("bgBlur");
-const shareBtn = document.getElementById("shareX");
 
+let history = [];
+let currentIndex = -1;
 let count = 0;
 
 async function loadCat() {
@@ -15,13 +16,18 @@ async function loadCat() {
     const catData = await catRes.json();
     const catUrl = catData[0].url;
 
-    imgEl.src = catUrl;
-    bgBlur.style.backgroundImage = `url(${catUrl})`;
-
     const factRes = await fetch("https://catfact.ninja/fact");
     const factData = await factRes.json();
 
-    factEl.textContent = factData.fact;
+    const newEntry = {
+      image: catUrl,
+      fact: factData.fact
+    };
+
+    history.push(newEntry);
+    currentIndex = history.length - 1;
+
+    displayCurrent();
 
     count++;
     countEl.textContent = count;
@@ -31,16 +37,53 @@ async function loadCat() {
   }
 }
 
+function displayCurrent() {
+  const current = history[currentIndex];
+  imgEl.src = current.image;
+  bgBlur.style.backgroundImage = `url(${current.image})`;
+  factEl.textContent = current.fact;
+}
+
+function showPrevious() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    displayCurrent();
+  }
+}
+
+function showNext() {
+  if (currentIndex < history.length - 1) {
+    currentIndex++;
+    displayCurrent();
+  } else {
+    loadCat();
+  }
+}
+
 btn.addEventListener("click", loadCat);
 
-shareBtn.addEventListener("click", () => {
-  const text = `${factEl.textContent} 🐱`;
-  const url = window.location.href;
+loadCat();
 
-  window.open(
-    `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
-    "_blank"
-  );
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
 });
 
-loadCat();
+document.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeDistance = touchEndX - touchStartX;
+
+  if (swipeDistance < -50) {
+    showNext();       // Swipe left → new wisdom
+  }
+
+  if (swipeDistance > 50) {
+    showPrevious();   // Swipe right → previous wisdom
+  }
+}
