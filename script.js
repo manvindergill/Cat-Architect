@@ -24,7 +24,6 @@ async function getCat() {
       factEl.textContent = currentFact;
       imgEl.src = imgData[0].url;
 
-      factEl.scrollTop = 0;
 
       factEl.classList.remove("fade-out");
       imgEl.classList.remove("fade-out");
