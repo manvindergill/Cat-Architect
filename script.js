@@ -3,6 +3,7 @@ const imgEl = document.getElementById("catImage");
 const btn = document.getElementById("generateBtn");
 const countEl = document.getElementById("count");
 const bgBlur = document.getElementById("bgBlur");
+const shareBtn = document.getElementById("shareX");
 
 let history = [];
 let currentIndex = -1;
@@ -64,6 +65,7 @@ btn.addEventListener("click", loadCat);
 
 loadCat();
 
+/* Swipe Support */
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -80,10 +82,35 @@ function handleSwipe() {
   const swipeDistance = touchEndX - touchStartX;
 
   if (swipeDistance < -50) {
-    showNext();       // Swipe left → new wisdom
+    showNext();
   }
 
   if (swipeDistance > 50) {
-    showPrevious();   // Swipe right → previous wisdom
+    showPrevious();
   }
 }
+
+/* Keyboard Support */
+document.addEventListener("keydown", (e) => {
+  const activeTag = document.activeElement.tagName.toLowerCase();
+  if (activeTag === "input" || activeTag === "textarea") return;
+
+  if (e.key === "ArrowRight") {
+    showNext();
+  }
+
+  if (e.key === "ArrowLeft") {
+    showPrevious();
+  }
+});
+
+/* X Share Button */
+shareBtn.addEventListener("click", () => {
+  const text = `Senior Cat Architect Says: ${factEl.textContent}`;
+
+  const twitterUrl =
+    "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(text);
+
+  window.location.href = twitterUrl;
+});
