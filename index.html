@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Daily Cat Wisdom</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Senior Cat Architect Says</title>
 
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="card">
-        <h2>Senior Cat Architect Says</h2>
+  <div class="card">
 
-        <img id="catImage" alt="Random Cat" />
+    <!-- Blurred background inside card -->
+    <div class="card-bg" id="cardBg"></div>
 
+    <div class="card-content">
+      <h2>Senior Cat Architect Says</h2>
+
+      <img id="catImage" alt="Random Cat" />
+
+      <div class="wisdom-wrapper">
         <p id="fact">Loading wisdom...</p>
+      </div>
 
-        <button id="generateBtn">Deploy New Wisdom</button>
+      <button id="generateBtn">Deploy New Wisdom</button>
 
-        <div class="counter">
-            Wisdoms deployed: <span id="count">0</span>
-        </div>
+      <div class="counter">
+        Wisdoms deployed: <span id="count">0</span>
+      </div>
 
-        <div class="share-section">
-            <a id="shareX" target="_blank" aria-label="Share on X">
-                <img src="/img/x.avif" alt="X logo" class="x-icon" />
-            </a>
-        </div>
+      <div class="share-section">
+        <a id="shareX" target="_blank" aria-label="Share on X">
+          <img src="img/x.avif" alt="X logo" class="x-icon" />
+        </a>
+      </div>
 
-        <div class="footer">
-            Powered by ManvinderGill
-        </div>
+      <div class="footer">
+        Powered by ManvinderGill
+      </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
+  </div>
 
+  <script src="script.js"></script>
+</body>
 </html>
